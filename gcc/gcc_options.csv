@@ -1,0 +1,23 @@
+/opt/toolchain/GNU_PATH/bin/,option,category,comment,condition
+"arm-none-eabi-gcc
+(CCFLAGS : *.c --> *.o)",-c,Overall,Create object file (not linking),-
+,-o <out_file>,Overall,Naming output file,-
+,-mcpu=<cortex>,ARM,<cortex>=cortex-m3/m4/m0 ¡¦,default
+,-mthumb,ARM,thumb mode select,default
+,-g,Debugging,Generate debug info.,default
+,-std=<standard>,C dialect,"<standard>=c99,c11,gnu99,gnu11",option
+,-O<level>,Optimize,"<level>=0,1,2,3,s(size),g(debug)",option
+,-Wall -Wextra,Warning,Print warning message,option
+,-I<path>,Preprocessor,Add include path,option
+,-D<define>,Preprocessor,Add define,option
+"arm-none-eabi-gcc
+(LDFLAGS : *.o --> *.elf)","Default <ARM>, <Debugging> options",,,
+,-T</*.ld>,Link,Link linker script file,default
+,-Xlinker -Map=<*.map>,Link,Create map file,option
+,"-Wl, --gc-sections",Link,Except unused objects,option
+,--specs=nano.specs -lc -lnosys,Link,Link specs to linker,option
+"arm-none-eabi-ar
+(*.o --> *.a)",cr <*.a> <*.o>,Library,Create library file,default
+"arm-none-eabi-objcopy
+(*.elf --> *.bin/hex)",-O binary <*.elf> <*.bin>,Exe,Create binary file,default
+,-O ihex <*.elf> <*.hex>,Exe,Create hex file,default
